@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOLCESUBURBAN | Moda urbana</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+<header class="header">
+  <div class="logo">DOLCE<span>SUBURBAN</span></div>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#catalogo">Catálogo</a>
+    <a href="#nosotros">Nosotros</a>
+  </nav>
+  <button class="cart-btn" onclick="openCart()">🛒 <span id="cart-count">0</span></button>
+</header>
+
+<main>
+<section id="inicio" class="hero">
+  <div>
+    <p class="eyebrow">MODA • ESTILO • ACTITUD</p>
+    <h1>Tu estilo,<br><span>tu esencia.</span></h1>
+    <p>Ropa y calzado para dama y hombre con un estilo urbano y moderno.</p>
+    <a class="primary" href="#catalogo">Ver catálogo</a>
+  </div>
+  <div class="hero-card">
+    <div class="hero-shoe">👟</div>
+    <h3>STREET COLLECTION</h3>
+    <p>Nuevos estilos disponibles</p>
+  </div>
+</section>
+
+<section id="catalogo" class="catalog">
+  <div class="section-title">
+    <div>
+      <p class="eyebrow">DESCUBRE</p>
+      <h2>Catálogo</h2>
+    </div>
+    <input id="search" type="search" placeholder="🔎 Buscar producto..." oninput="renderProducts()">
+  </div>
+
+  <div class="filters">
+    <button class="filter active" data-filter="todos">Todos</button>
+    <button class="filter" data-filter="mujer">Dama</button>
+    <button class="filter" data-filter="hombre">Hombre</button>
+    <button class="filter" data-filter="ropa">Ropa</button>
+    <button class="filter" data-filter="calzado">Calzado</button>
+  </div>
+
+  <div id="products" class="product-grid"></div>
+</section>
+
+<section id="nosotros" class="about">
+  <div>
+    <p class="eyebrow">DOLCESUBURBAN</p>
+    <h2>Moda que habla por ti.</h2>
+  </div>
+  <p>Una tienda pensada para quienes quieren combinar comodidad, personalidad y estilo. Explora nuestro catálogo y agrega tus favoritos al carrito.</p>
+</section>
+</main>
+
+<div id="chatbot" class="chatbot">
+  <div class="chat-header">
+    <div><strong>🤖 Asistente DOLCESUBURBAN</strong><small>En línea</small></div>
+    <button onclick="toggleChat()">×</button>
+  </div>
+  <div id="chat-messages" class="chat-messages">
+    <div class="message bot">¡Hola! 👋 Soy el asistente de DOLCESUBURBAN. ¿En qué puedo ayudarte?</div>
+  </div>
+  <div class="quick">
+    <button onclick="quickAsk('¿Qué tallas manejan?')">Tallas</button>
+    <button onclick="quickAsk('¿Hacen envíos?')">Envíos</button>
+    <button onclick="quickAsk('¿Cómo puedo pagar?')">Pagos</button>
+  </div>
+  <form id="chat-form" class="chat-form">
+    <input id="chat-input" autocomplete="off" placeholder="Escribe tu pregunta...">
+    <button>➤</button>
+  </form>
+</div>
+<button id="chat-toggle" class="chat-toggle" onclick="toggleChat()">💬</button>
+
+<div id="cart-modal" class="modal">
+  <div class="modal-box">
+    <button class="close" onclick="closeCart()">×</button>
+    <h2>🛒 Tu carrito</h2>
+    <div id="cart-items"></div>
+    <div class="cart-total">Total: <strong id="cart-total">$0 COP</strong></div>
+    <button class="primary full" onclick="checkout()">Finalizar compra</button>
+  </div>
+</div>
+
+<script>
+window.PRODUCTS = {{ products|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
